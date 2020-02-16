@@ -11,7 +11,7 @@ all: preprocess $(TARGET)
 	$(CC) $(CFLAGS) $(WARNINGS) $(CPPFLAGS) -o $@ -c $<
 
 $(TARGET): $(OBJS)
-	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS) $(PLATFORM_LDFLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS) -llua $(PLATFORM_LDFLAGS)
 
 preprocess:
 	lua ./codegen.lua $(VARS) $(TMPL)
@@ -19,5 +19,3 @@ preprocess:
 install:
 	mkdir -p $(LIBDIR)
 	cp $(TARGET) $(LIBDIR)
-	rm -f $(OBJS) $(TARGET)
-
